@@ -14,20 +14,32 @@ Open to **Software Engineer · Full-Stack Developer · Backend Developer · Juni
   </a>
 </p>
 
-I work primarily with **Python, FastAPI, React, PostgreSQL, REST APIs, and JWT-based authentication**.
+I work primarily with **Python, FastAPI, React, PostgreSQL, and REST APIs**.
 
-Computer Science graduate who designed and built RenewGrid — an AI-powered e-waste lifecycle management platform — from scratch as a final-year project. I handled everything: database schema design, a layered FastAPI backend using the repository pattern, a React 19 SPA with four completely isolated role dashboards, a 12-state pickup state machine with an immutable audit trail, AI price estimation, QR-based collector verification, and an automated reward and CO₂ tracking engine.
+Most recently, I built RenewGrid as my final-year Computer Science project. It is a full-stack e-waste recycling platform that connects producers, collectors, and recycling facilities through a single system. I handled the database schema, the FastAPI backend with a repository and service layer, a React 19 SPA with four role-based dashboards, a 12-state pickup lifecycle, AI price estimation, QR-based verification, and an automated reward engine.
 
 ---
 
 ## Technical Focus
 
 - **Languages:** Python · JavaScript · Java · C · C++
-- **Backend:** FastAPI · REST APIs · JWT (access + refresh tokens) · SQLAlchemy · Alembic · slowapi · smtplib
+- **Backend:** FastAPI · REST APIs · JWT authentication · SQLAlchemy · Alembic · slowapi · smtplib
 - **Frontend:** React 19 · React Router v7 · Vite · TailwindCSS · Leaflet · html5-qrcode · jsPDF
-- **Databases:** PostgreSQL · SQL · SQLAlchemy ORM
-- **Architecture:** Repository pattern · Service layer · RBAC · State machines · Background tasks · File upload handling
-- **Tools:** Git · GitHub · Node.js · npm · VS Code
+- **Databases:** PostgreSQL · SQL
+- **Architecture:** Repository pattern · Service layer · RBAC · State machines · Background tasks
+- **Tools:** Git · GitHub · Node.js · VS Code
+
+---
+
+## Skills
+
+[![Skills](https://skillicons.dev/icons?i=python,fastapi,react,postgres,js,html,css,tailwind,git,github,vite,nodejs,java,cpp,vscode)](https://skillicons.dev)
+
+---
+
+## Currently Exploring
+
+Docker · containerising full-stack applications · API testing with Pytest · CI/CD pipelines
 
 ---
 
@@ -35,27 +47,17 @@ Computer Science graduate who designed and built RenewGrid — an AI-powered e-w
 
 ### [RenewGrid — FastAPI · React · PostgreSQL · AI Estimation](https://github.com/Sameena70/RenewGrid)
 
-RenewGrid is a full-stack e-waste recycling and rewards platform I designed and built entirely from scratch as my final-year Computer Science project. The system connects e-waste producers, pickup collectors, and recycling facilities under a single platform. I handled the full stack — from PostgreSQL schema design and FastAPI backend architecture to the React 19 SPA with four completely isolated role-based dashboards.
+RenewGrid is a full-stack e-waste recycling and rewards platform I built from scratch as my final-year Computer Science project. The system connects e-waste producers, pickup collectors, and recycling facilities under one platform. I designed the database, built the backend API, and built the frontend with four separate dashboards for each role.
 
 ### What I implemented
 
-- **Full-stack architecture from scratch:** Designed a 14-table PostgreSQL schema, built the entire FastAPI backend using a repository pattern (one repository per domain) and a service layer that keeps all business logic out of routers, and implemented the React 19 SPA with protected role routing enforced at both the API and frontend layers
-- **AI pricing engine:** Reads admin-configured `PricingRule` rows from the database per category and applies a base price, per-kg rate, and condition multiplier (working / partial / broken); falls back to hardcoded category rates when no active rule exists for a given category
-- **12-state pickup lifecycle:** Implemented a pickup status state machine (`PENDING → ASSIGNED → IN_PROGRESS → PROOF_UPLOADED → COLLECTED → DELIVERED → PROCESSING → COMPLETED`) with every transition validated against the current state and persisted to an immutable `pickup_status_history` audit table with actor ID, timestamp, and an optional note
-- **JWT authentication system:** Dual-token system with short-lived access tokens and 7-day refresh tokens; all protected routes verified through a `get_current_user` FastAPI dependency; login endpoint rate-limited to 5 requests/minute via slowapi to block brute-force
-- **RBAC — 4 isolated roles:** Admin, User, Collector, and Recycler enforced at the API through FastAPI dependency injection and at the frontend through `ProtectedRoute` wrappers — each role accesses a completely separate dashboard with no route overlap
-- **QR code verification:** Server generates a QR code per pickup; the user displays it on-screen; the collector scans it with their device camera using html5-qrcode before the status can advance — preventing misidentification
-- **Reward & CO₂ engine:** Background task triggered on pickup completion that awards 10 pts/kg and calculates CO₂ saved at 0.5 kg/kg; idempotent — checks for an existing reward before inserting; dispatches an in-app notification to the producer on success
-- **Transactional email:** Password-reset HTML emails dispatched via Python smtplib as a FastAPI `BackgroundTask`; STARTTLS/Gmail-compatible; 30-minute token expiry; all SMTP credentials read from environment variables
-- **Collector proof upload:** Collectors upload a photo as evidence of collection; validated by MIME type and size (5 MB cap); stored under `uploads/proofs/` with a UUID-prefixed filename and linked to the pickup record via a dedicated `CollectorProof` model
-- **Admin analytics dashboard:** Platform-wide aggregates across users, waste volume, pickups by status, CO₂ saved, and revenue; includes trend forecasting, geographic area analytics, AI pricing rule management, manual reward point assignment, and PDF report export
-
----
-
-## GitHub Activity
-
-<p>
-  <img src="https://github-readme-stats.vercel.app/api?username=Sameena70&show_icons=true&theme=dark&hide_border=true&count_private=true&include_all_commits=true" alt="GitHub Stats">
-  <br>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sameena70&layout=compact&theme=dark&hide_border=true&langs_count=6" alt="Top Languages">
-</p>
+- **Full-stack architecture:** Designed a 14-table PostgreSQL schema, built the FastAPI backend using a repository pattern with one repository per domain and a service layer that keeps all business logic out of the routers, and built the React 19 SPA with role-based protected routing at both the API and frontend layers
+- **AI pricing engine:** Reads admin-configured pricing rules from the database per waste category and applies a base price, a per-kg rate, and a condition multiplier for working, partial, or broken items. Falls back to hardcoded category rates when no active rule exists
+- **12-state pickup lifecycle:** Built a pickup status state machine from PENDING through ASSIGNED, IN_PROGRESS, PROOF_UPLOADED, COLLECTED, DELIVERED, PROCESSING, to COMPLETED. Every transition is validated against the current state and written to an immutable pickup_status_history table with actor ID, timestamp, and an optional note
+- **JWT authentication:** Dual-token system with short-lived access tokens and 7-day refresh tokens. All protected routes go through a get_current_user FastAPI dependency. Login is rate-limited to 5 requests per minute via slowapi to block brute-force attempts
+- **RBAC with 4 roles:** Admin, User, Collector, and Recycler are enforced at the API through FastAPI dependency injection and at the frontend through ProtectedRoute wrappers. Each role has its own dashboard with no route overlap
+- **QR code verification:** The server generates a QR code per pickup. The user shows it on screen and the collector scans it with their camera via html5-qrcode before the pickup status can advance. This prevents misidentification between jobs
+- **Reward and CO2 engine:** A background task runs on pickup completion, awards 10 points per kg collected, and calculates CO2 saved at 0.5 kg per kg of waste. It checks for an existing reward before inserting so it is safe to call more than once. It also sends an in-app notification to the producer
+- **Transactional email:** Password reset HTML emails are sent via Python smtplib as a FastAPI BackgroundTask. The setup is Gmail-compatible with STARTTLS and tokens expire after 30 minutes. All credentials are read from environment variables
+- **Collector proof upload:** Collectors upload a photo as proof of collection. The file is validated by MIME type and capped at 5 MB, stored under uploads/proofs/ with a UUID-prefixed filename, and linked to the pickup through a dedicated CollectorProof model
+- **Admin analytics dashboard:** Aggregates platform-wide data including user counts, waste volume, pickup status breakdown, CO2 saved, and revenue. Includes trend forecasting, area analytics, pricing rule management, manual reward point assignment, and PDF report export
