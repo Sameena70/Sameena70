@@ -37,12 +37,6 @@ Most recently, I built RenewGrid as my final-year Computer Science project. It i
 
 ---
 
-## Currently Exploring
-
-Docker · containerising full-stack applications · API testing with Pytest · CI/CD pipelines
-
----
-
 ## Featured Project
 
 ### [RenewGrid — FastAPI · React · PostgreSQL · AI Estimation](https://github.com/Sameena70/RenewGrid)
